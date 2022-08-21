@@ -7,7 +7,18 @@ app=FastAPI()
 # PUT- Update data
 # DELETE- Delete Item
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+students={
+    1: {
+        "name": "john",
+        "age": 24,
+        "class": "Computer Science"
+    }
+}
 
+@app.get("/")
+async def index():
+    return {"name": "First Data"}
+
+@app.get("/student/{student_id}")
+def get_student(student_id: int):
+    return students[student_id]
