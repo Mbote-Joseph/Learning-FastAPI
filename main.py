@@ -30,3 +30,8 @@ def get_student_by_name(name: str=Path(None, description="The name of the studen
         if students[student_id]["name"]==name:
             return students[student_id]
     return {"Data": "Not Found"}
+
+@app.post('post-student')
+def post_student(student_id: int=Path(None, description="The ID of the student you want to view")):
+    return students[student_id]
+
