@@ -1,5 +1,7 @@
 from fastapi import FastAPI, Path
 from typing import Union
+from pydantic import BaseModel
+
 
 
 app=FastAPI()
@@ -55,4 +57,19 @@ async def read_item(item_id: str, q: Union[str, None] = None, short: bool = Fals
         item.update(
             {"description": "This is an amazing item that has a long description"}
         )
+    return item
+
+
+class Item(BaseModel):
+    name: str
+    description: Union[str, None] = None
+    price: float
+    tax: Union[float, None] = None
+
+
+app = FastAPI()
+
+
+@app.post("/items/")
+def create_item(item: Item):
     return item
