@@ -35,3 +35,10 @@ def get_student_by_name(name: str=Path(None, description="The name of the studen
 def post_student(student_id: int=Path(None, description="The ID of the student you want to view")):
     return students[student_id]
 
+
+fake_items_db = [{"item_name": "Foo"}, {"item_name": "Bar"}, {"item_name": "Baz"}]
+
+
+@app.get("/items/")
+async def read_item(skip: int = 0, limit: int = 10):
+    return fake_items_db[skip : skip + limit]
